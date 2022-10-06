@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1664973761842-1" author="vlasov (generated)">
+        <createTable tableName="task">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_task"/>
+            </column>
+            <column name="project_id" type="BIGINT"/>
+            <column name="assignee_id" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="start_date" type="timestamp with time zone"/>
+            <column name="end_date" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1664973761842-2" author="vlasov (generated)">
+        <addForeignKeyConstraint baseColumnNames="assignee_id" baseTableName="task" constraintName="FK_TASK_ON_ASSIGNEE"
+                                 referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="1664973761842-3" author="vlasov (generated)">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="task" constraintName="FK_TASK_ON_PROJECT"
+                                 referencedColumnNames="id" referencedTableName="project"/>
+    </changeSet>
+
+</databaseChangeLog>
